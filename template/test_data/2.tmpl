@@ -1,0 +1,22 @@
+{{with .Account -}}
+    Dear {{.FirstName}} {{.LastName}},
+{{- end}}
+
+Below are your account statement details for period from {{.FromDate }} to {{.ToDate }}.
+
+{{if .Purchases -}}
+    Your purchases:
+    {{- range .Purchases }}
+        {{ .Date }} {{ printf "%-20s" .Description }} {{.AmountInCents -}}
+    {{- end}}
+{{- else}}
+    You didn't make any purchases during the period.
+{{- end}}
+
+{{$note := .Account -}}
+{{if $note -}}
+    Note: {{$note}}
+{{- end}}
+
+Best Wishes,
+Customer Service
